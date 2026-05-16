@@ -6,7 +6,7 @@ import { setSelectedUser } from '../redux/userSlice';
 
 function MessageContainer() {
     const { selectedUser , authUser,onlineUsers} = useSelector(store => store.user);
-    const dispath = useDispatch(store => store.user);
+    const dispath = useDispatch();
     const isOnline = selectedUser && onlineUsers?.includes(selectedUser._id);
     // useEffect(() => {
     //     return () => dispath(setSelectedUser(null));
@@ -16,7 +16,7 @@ function MessageContainer() {
         <>
             {
                 selectedUser !== null ? (
-                    <div className='md:min-w-[550px] flex flex-col'>
+                    <div className='md:min-w-[550px] flex flex-col h-full'>
                         <div className='flex gap-2 items-center bg-zinc-800 text-white px-4 py-2 mb-2'>
                             <div className={`avatar ${isOnline ? 'online':''}`}>
                                 <div className='w-12 rounded-full'>

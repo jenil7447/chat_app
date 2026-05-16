@@ -3,22 +3,25 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-function Message({message}) {
+function Message({ message }) {
     const scroll = useRef();
-    const{authUser,selectedUser} = useSelector(store=>store.user);
+    const { authUser, selectedUser } = useSelector(store => store.user);
 
-    useEffect(()=>{
-        scroll.current?.scrollIntoView({behavior:"smooth"});
-    },[message])
+    useEffect(() => {
+        scroll.current?.scrollIntoView({ behavior: "smooth" });
+    }, [message])
     return (
         <div ref={scroll} className={`chat ${authUser?._id === message?.senderId ? 'chat-end' : 'chat-start'}`}>
             <div className='chat-image avatar'>
                 <div className='w-10 rounded-full'>
-                    <img src={message?.senderId === authUser?._id ? authUser?.profilePhoto: selectedUser?.profilePhoto} alt='images'/>
+                    <img src={message?.senderId === authUser?._id ? authUser?.profilePhoto : selectedUser?.profilePhoto} alt='images' />
                 </div>
             </div>
             <div className='chat-header'>
-                <time className='text-xs opacity-50 text-white'>12:45</time>
+                {/* <time className='text-xs opacity-50 text-white'>12:45</time> */}
+                <time className='text-xs opacity-50 text-white'>
+                    {new Date(message?.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </time>
             </div>
             <div className={`chat-bubble ${message?.senderId !== authUser?._id ? 'bg-gray-200 text-black' : ''} `}>{message?.message}</div>
         </div>

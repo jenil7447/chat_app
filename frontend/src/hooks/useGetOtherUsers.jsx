@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import {useDispatch} from "react-redux";
 import { setOtherUsers } from '../redux/userSlice';
+import.meta.env.VITE_API_URL
 
 function UseGetOtherUsers() {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ function UseGetOtherUsers() {
         const fetchOtherUser = async()=>{
             try{
                 axios.defaults.withCredentials  = true;
-                const res =  await axios.get(`http://localhost:8080/api/v1/user/`);
+                const res =  await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/`);
                 // console.log(res);
                 //store
                 dispatch(setOtherUsers(res.data));
