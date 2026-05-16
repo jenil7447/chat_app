@@ -1,13 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedUser } from '../redux/userSlice';
+
+import { setSelectedUser, clearUnread } from '../redux/userSlice';
 
 function OtherUser({user}) {
     const dispatch = useDispatch();
-    const {selectedUser,onlineUsers} = useSelector(store => store.user);
+    const {selectedUser,onlineUsers ,unreadCounts = {}} = useSelector(store => store.user);
     const isOnline = user && onlineUsers?.includes(user._id);
+    const unreadCount = unreadCounts?.[user._id] || 0;
+    
     const selectedUserHandler = (user)=>{
         dispatch(setSelectedUser(user));
+        dispatch(clearUnread(user._id));
     }
 
     return (
@@ -25,6 +29,11 @@ function OtherUser({user}) {
                     <div className='flex flex-col flex-1'>
                         <div className='flex justify-between gap-2'>
                             <p>{user?.fullName}</p>
+                            {unreadCount > 0 && (
+                            <span className='bg-green-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center'>
+                                {unreadCount > 9 ? '9+' : unreadCount}
+                            </span>
+                        )}
                         </div>
                     </div>
                 </div>

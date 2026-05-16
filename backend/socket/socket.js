@@ -31,5 +31,23 @@ io.on('connection',(socket)=>{
         delete userSocketMap[userId];
         io.emit('getOnlineUsers',Object.keys(userSocketMap));
     })
+    //  Typing indicator events
+    socket.on('typing', (receiverId) => {
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit('typing', userId);
+        }
+    });
+     socket.on('stopTyping', (receiverId) => {
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit('stopTyping', userId);
+        }
+    });
+    socket.on('disconnect',()=>{
+        console.log('user disconnected',socket.id);
+        delete userSocketMap[userId];
+        io.emit('getOnlineUsers',Object.keys(userSocketMap));
+    });
 })
 export {app , io, server};
