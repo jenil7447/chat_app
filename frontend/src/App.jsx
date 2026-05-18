@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import { setSocket } from "./redux/socketSlice";
 import { setOnlineUsers } from "./redux/userSlice";
 
+
 function App() {
   const { authUser } = useSelector(store => store.user);
   const { socket } = useSelector(store => store.socket);
@@ -30,7 +31,7 @@ function App() {
 
   useEffect(() => {
     if (authUser && authUser._id) {
-      const socket = io('http://localhost:8080', {
+      const socket = io('import.meta.env.VITE_API_URL', {
         query: { userId: authUser._id },
         withCredentials: true,
       });
