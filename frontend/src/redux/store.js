@@ -18,6 +18,7 @@ import {
     key: 'root',
     version: 1,
     storage,
+    blacklist: ['socket']
   }
 const rootReducer = combineReducers({
     user:userReducer,

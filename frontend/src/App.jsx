@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     if (authUser && authUser._id) {
-      const socket = io('import.meta.env.VITE_API_URL', {
+      const socket = io(import.meta.env.VITE_API_URL, {
         query: { userId: authUser._id },
         withCredentials: true,
       });
