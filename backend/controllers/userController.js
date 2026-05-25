@@ -19,8 +19,10 @@ export const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // profilePhoto - using more reliable avatar service
-        const maleProfilePhoto = `https://ui-avatars.com/api/?name=${username}&background=0D8ABC&color=fff&size=200`;
-        const femaleProfilePhoto = `https://ui-avatars.com/api/?name=${username}&background=FF69B4&color=fff&size=200`;
+        // const maleProfilePhoto = `https://ui-avatars.com/api/?name=${username}&background=0D8ABC&color=fff&size=200`;
+        // const femaleProfilePhoto = `https://ui-avatars.com/api/?name=${username}&background=FF69B4&color=fff&size=200`;
+        const maleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&backgroundColor=b6e3f4`;
+        const femaleProfilePhoto = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&backgroundColor=ffb3ba`;
        
         
 
